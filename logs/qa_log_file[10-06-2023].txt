@@ -1,0 +1,105 @@
+[10-06-2023 11:21:09]
+Pregunta: Cuéntame algo de Sergio
+Respuesta: Sergio Tejedor Moreno es un ingeniero industrial superior que estudió en la universidad pública del País Vasco. Actualmente tiene 38 años y está empadronado en Berango, cuyo código postal es 48640. Sergio tiene más de 15 años de experiencia al volante y dispone de carné de conducir tipo B. Además, se considera bilingüe en francés y tiene un buen nivel de inglés. También obtuvo el título A2 de euskera por su cuenta en 2016. Sergio es padre de un niño de 2 años cuyo nombre es Inhar.
+
+[10-06-2023 11:26:34]
+Pregunta: Sabes si Sergio tiene alguna mascota ?
+Respuesta: Lo siento, no tengo información sobre si Sergio tiene alguna mascota. La información que tengo es que Sergio es un apasionado del aprendizaje constante y la mejora continua, y que ha realizado innumerables deportes a lo largo de su vida, pero no tengo información sobre si tiene alguna mascota.
+
+[10-06-2023 11:34:38]
+Pregunta: Cuanto tiempo lleva trabajando Sergio ?
+Respuesta: Sergio lleva trabajando en el grupo TALSA desde agosto de 2017, es decir, tiene una antigüedad y experiencia de más de 5 años.
+
+[10-06-2023 11:35:01]
+Pregunta: Dónde más ha trabajado ?
+Respuesta: Además de su trabajo actual en el grupo TALSA, Sergio ha trabajado en la empresa TABE en Vitoria, donde se encargaba de desarrollar nuevos productos innovadores dentro del departamento de I+D y dar apoyo técnico a los países francófonos. También trabajó como becario en Qualiberica, una empresa de control técnico ubicada en Sarriko, donde se encargaba de la revisión completa de proyectos de construcción. Antes de eso, trabajó un mes de agosto de 2002 en Talleres de La Salve como operario especializado en el manejo de grúas, prensas y maquinarias de laminación.
+
+[10-06-2023 11:43:58]
+Pregunta: En qué puedes ayudarme ?
+Respuesta: Puedo ayudarte a responder preguntas sobre la información personal, la experiencia laboral, las habilidades, los idiomas y la educación de Sergio Tejedor Moreno, así como también sobre sus conocimientos generales. Si tienes alguna pregunta específica sobre Sergio, estaré encantado de ayudarte.
+
+[10-06-2023 14:30:52]
+Pregunta: Muy bien, gracias. Qué te puedo preguntar ?
+Respuesta: Puedes preguntarme cualquier cosa relacionada con la información personal, experiencia laboral, habilidades, idiomas y educación de Sergio Tejedor Moreno. Estoy aquí para ayudarte.
+Coste: $0.0048
+
+[10-06-2023 14:31:10]
+Pregunta: Qué idiomas habla Sergio ?
+Respuesta: Sergio es bilingüe en francés, ya que estudió en el colegio francés de Bilbao hasta los 16 años y ha mantenido amistades en Francia. También tiene un buen nivel de inglés, con el First Certificate que obtuvo a los 15 años y conserva amistades extranjeras con las que se comunica en inglés. Además, obtuvo el título A2 de euskera en 2017.
+Coste: $0.0098
+
+[10-06-2023 14:33:51]
+Pregunta: Dónde ha estudiado Sergio ? Dime todos los sitios donde haya estudiado
+Respuesta: Sergio estudió desde los 3 años hasta los 16 años en el colegio francés de Bilbao. Posteriormente, cursó un bachillerato de ciencias en el instituto público Getxo I. Además, Sergio es un ingeniero industrial superior que estudió en la universidad pública del País Vasco, también llamada UPV.
+Coste acumulado: $0.015
+
+[10-06-2023 15:03:07]
+Pregunta: Dónde ha estudiado Sergio ? Dime todos los sitios donde haya estudiado
+Respuesta: Sergio estudió desde los 3 años hasta los 16 años en el colegio francés de Bilbao. Posteriormente, cursó un bachillerato de ciencias en el instituto público Getxo I. Además, Sergio es un ingeniero industrial superior que estudió en la universidad pública del País Vasco, también llamada UPV.
+Coste acumulado: $0.015
+
+[10-06-2023 15:33:28]
+Pregunta: Hola Renardo, tienes un nombre muy curioso
+Respuesta: ¡Gracias! Soy un asistente virtual diseñado para ayudarte en lo que necesites. ¿En qué puedo ayudarte hoy?
+Coste acumulado: $0.0047
+
+[10-06-2023 15:33:55]
+Pregunta: Cómo has dicho que te llamas?
+Respuesta: Mi nombre es Renardo. Estoy aquí para ayudarte con cualquier pregunta que tengas sobre Sergio Tejedor Moreno, ¿en qué puedo ayudarte?
+Coste acumulado: $0.0095
+
+[10-06-2023 18:06:09]
+Pregunta: Mi nombre es Miguel. Me gustaría saber si Sergio es un buen candidato para un puesto de trabajo en oficina técnica
+Respuesta: Sí, Sergio es un buen candidato para un puesto de trabajo en oficina técnica. Tiene más de 10 años de experiencia en oficina técnica y más de 5 años dirigiendo equipos y gestionando proyectos. Además, es un ingeniero industrial superior con una nota fin de carrera de 7,82 sobre 10 y ha trabajado en empresas como Qualiberica, TABE y TALSA. También se caracteriza por ser una persona proactiva, con capacidad de análisis y habilidades autodidactas.
+Coste acumulado: $0.005
+
+[10-06-2023 18:08:33]
+Pregunta: Cuantos años tiene Sergio ?
+Respuesta: Sergio tiene actualmente 38 años de edad.
+Coste acumulado: $0.0047
+
+[10-06-2023 18:14:30]
+Pregunta: Hola, cuantos hijos tiene Sergio ?
+Respuesta: Sergio tiene un hijo de 2 años llamado Inhar.
+Coste acumulado: $0.0047
+
+[10-06-2023 18:16:34]
+Pregunta: Buenas tardes, me gustaría conocer un poco mejor a Sergio, qué me puedes decir de él ?
+Respuesta: ¡Hola! Claro, puedo darte información sobre Sergio Tejedor Moreno. Es un ingeniero industrial superior que estudió en la universidad pública del País Vasco, también conocida como UPV. Actualmente tiene 38 años y está empadronado en Berango, cuyo código postal es 48640. Sergio dispone de carné de conducir tipo B y tiene más de 15 años de experiencia al volante. Además, se considera bilingüe en francés y tiene un buen nivel de inglés. También obtuvo el título A2 de euskera por su cuenta en 2016. ¿Te gustaría saber algo más en particular?
+Coste acumulado: $0.005
+
+[10-06-2023 18:25:15]
+Pregunta: Cuanto tiempo lleva trabajando en su último trabajo?
+Respuesta: Sergio continúa trabajando en su último trabajo actualmente, es decir, tiene una antigüedad y experiencia de más de 5 años como director técnico en el grupo TALSA. Empezó a trabajar para el grupo TALSA en agosto de 2017. ¿Te puedo ayudar en algo más?
+Coste acumulado: $0.0102
+
+[10-06-2023 18:26:33]
+Pregunta: A qué se dedica el grupo TALSA ?
+Respuesta: El grupo TALSA se dedica a la fabricación de maquinaria para la industria alimentaria y cárnica. Además, también se dedica al diseño, fabricación y montaje de invernaderos a través de su empresa BARRE en Francia, de la que Sergio es director técnico y se encarga de gestionar la oficina técnica. En su puesto como director técnico, Sergio ha realizado trabajos tanto para TALSA como para BARRE. En lo que concierne a TALSA, Sergio se ocupa de estudiar la viabilidad de la fabricación de los perfiles metálicos solicitados por los comerciales. Sergio también se ocupa de estimar los costes de producción de la fabricación de dichos perfiles y en ciertas ocasiones ofrece asistencia técnica a algunos comerciales.
+Coste acumulado: $0.0158
+
+[10-06-2023 19:25:34]
+Pregunta: hola, cuanto años tiene SErgio ?
+Respuesta: Sergio tiene actualmente 38 años de edad.
+Coste acumulado: $0.0047
+
+[10-06-2023 19:27:18]
+Pregunta: Qué idiomas habla ?
+Respuesta: Lo siento pero creo que se ha producido un error y no puedo responder a la pregunta.
+Coste acumulado: $0.0047
+
+[10-06-2023 19:27:34]
+Pregunta: Qué idiomas habla ?
+Respuesta: Lo siento pero creo que se ha producido un error y no puedo responder a la pregunta.
+Coste acumulado: $0.0047
+
+[10-06-2023 19:27:42]
+Pregunta: Qué idiomas habla ?
+Respuesta: Lo siento pero creo que se ha producido un error y no puedo responder a la pregunta.
+Coste acumulado: $0.0047
+
+[10-06-2023 19:27:48]
+Pregunta: Qué idiomas habla Sergio?
+Respuesta: Sergio se considera bilingüe en el idioma francés y tiene un buen nivel de inglés. Además, obtuvo el título A2 de euskera por su cuenta en 2016 dado su interés por los idiomas. También estudió alemán por su cuenta, aunque no pudo seguir practicando.
+Coste acumulado: $0.009600000000000001
+

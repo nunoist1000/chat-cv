@@ -1,0 +1,9 @@
+streamlit
+langchain
+yagmail
+keyring
+pydantic
+pymongo
+openai
+pytz
+python-dotenv

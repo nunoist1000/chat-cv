@@ -1,0 +1,90 @@
+[13-06-2023 12:53:39]
+Pregunta: Buenos días ! Quisiera saber si Sergio está casado o soltero
+Respuesta: Sergio no está casado actualmente, pero tiene pareja.
+Coste acumulado: $0.0048
+
+[13-06-2023 12:58:09]
+Pregunta: Dónde trabaja ?
+Respuesta: Sergio trabaja como director técnico en el grupo TALSA, es decir, se ocupa de gestionar la oficina técnica de la empresa BARRE en Francia, dedicada al diseño, fabricación y montaje de invernaderos.
+Coste acumulado: $0.0097
+
+[13-06-2023 13:31:20]
+Pregunta: tiene conocimientos de alemán ?
+Respuesta: Sí, Sergio estudió alemán por su cuenta, pero desafortunadamente no ha podido seguir practicándolo.
+Coste acumulado: $0.014700000000000001
+
+[13-06-2023 14:00:43]
+Pregunta: Qué más idiomas sabe Sergio a parte del español y alemán ?
+Respuesta: Sergio se considera bilingüe en francés, ya que estudió en el colegio francés de Bilbao hasta la edad de 16 años. Además, tiene un buen nivel de inglés y obtuvo el título A2 de euskera en 2017.
+Coste acumulado: $0.0199
+
+[13-06-2023 14:44:17]
+Pregunta: Cuales son tus funciones ?
+Respuesta: Soy un asistente virtual diseñado para responder preguntas específicas sobre la información personal, experiencia laboral, habilidades, idiomas y educación de Sergio. Si tienes alguna pregunta relacionada con estos temas, estaré encantado de ayudarte.
+Coste acumulado: $0.0048
+
+[13-06-2023 14:46:37]
+Pregunta: Yo me llamo Jorge y me gustaría tener información sobre Sergio. Podrías acabar todas tus frases diciendo mi nombre por favor?
+Respuesta: ¡Por supuesto, Jorge! Me llamo Renardo y soy un asistente virtual creado para ayudarte a conocer más sobre Sergio. ¿En qué puedo ayudarte?
+Coste acumulado: $0.0048
+
+[13-06-2023 14:49:18]
+Pregunta: Tiene hijos ?
+Respuesta: Sí, Jorge. Sergio es padre de un niño de 2 años llamado Inhar.
+Coste acumulado: $0.0097
+
+[13-06-2023 14:50:52]
+Pregunta: Sergio está buscando trabajo actualmente ?
+Respuesta: Lo siento, Jorge, la información que tengo es limitada a lo que se presenta en el contexto. No tengo información sobre si Sergio está buscando trabajo en la actualidad. Sin embargo, puedo decirte que Sergio trabaja actualmente en la empresa TALSA como director técnico.
+Coste acumulado: $0.014700000000000001
+
+[13-06-2023 14:51:31]
+Pregunta: Tú crees que Sergio estaría interesado en trabajar de desarrollador con Python ?
+Respuesta: Es difícil saberlo con certeza, Jorge, ya que no tengo acceso a los intereses y preferencias actuales de Sergio. Sin embargo, puedo decirte que a Sergio le gusta aprender cosas nuevas y que es un apasionado de la programación, por lo que es posible que tenga interés en trabajar como desarrollador con Python.
+Coste acumulado: $0.0199
+
+[13-06-2023 14:53:21]
+Pregunta: Puedo hacerte las preguntas sobre Sergio en inglés ?
+Respuesta: Of course, Jorge! You can ask me any questions about Sergio in English. I will be happy to answer them for you.
+Coste acumulado: $0.0252
+
+[13-06-2023 14:56:16]
+Pregunta: Ha ido a la universidad ?
+Respuesta: Yes, Sergio has gone to university. He studied industrial engineering at the public university of the Basque Country, also known as UPV. Sergio graduated with a final grade of 7.82 out of 10.
+Coste acumulado: $0.030699999999999998
+
+[13-06-2023 15:39:04]
+Pregunta: Cómo dije que me llamaba ?
+Respuesta: Your name is Jorge, as you mentioned earlier. Is there anything else I can help you with, Jorge?
+Coste acumulado: $0.0363
+
+[13-06-2023 15:39:25]
+Pregunta: Puedes volver a contestarme en español por favor.
+Respuesta: ¡Por supuesto, Jorge! ¿En qué más puedo ayudarte?
+Coste acumulado: $0.0419
+
+[13-06-2023 15:45:20]
+Pregunta: Yo me llamo Pedro
+Respuesta: ¡Hola Pedro! ¿En qué puedo ayudarte hoy? ¿Tienes alguna pregunta sobre la información personal, la experiencia laboral, las habilidades, los idiomas o la educación de Sergio? Estoy aquí para ayudarte.
+Coste acumulado: $0.0048
+
+[13-06-2023 15:47:00]
+Pregunta: Qué titulos de frances tiene sergio?
+Respuesta: Sergio no tiene títulos de francés, pero se considera bilingüe en dicho idioma. Estudió en el colegio francés de Bilbao hasta los 16 años y siempre ha tenido amistades en Francia y ha pasado largos periodos de su adolescencia en compañía de gente de habla francesa. Además, durante su estancia en la empresa TABE, Sergio se dedicaba a dar apoyo técnico y asistencia técnica a los países francófonos, y viajó en varias ocasiones a Francia para dar soporte técnico a clientes de esta zona.
+Coste acumulado: $0.009899999999999999
+
+[13-06-2023 21:45:14]
+Pregunta: Buenas noches Renardo, me puedes decir si Sergio está actualmente trabajando?
+Respuesta: Sí, Sergio está actualmente trabajando como director técnico en el grupo TALSA. Tiene una antigüedad y experiencia de más de 5 años en la empresa.
+Coste acumulado: $0.0048
+
+[13-06-2023 21:48:10]
+Pregunta: Sabes si ha trabajado en Vitoria ?
+Respuesta: Sí, Sergio trabajó en Vitoria para la empresa TABE o Talleres Betoño. Esta empresa se dedica a la fabricación de martillos hidráulicos y maquinaria para la demolición y movimiento de tierra. Sergio trabajó en la oficina técnica de TABE junto con el director técnico y otros dos delineantes.
+Coste acumulado: $0.0098
+
+[13-06-2023 21:48:55]
+Pregunta: Qué hacía Sergio en la oficina técnica para la empresa TABE ? qué es lo que destacarías de sus funciones ?
+Respuesta: En la oficina técnica de TABE, Sergio se encargaba de desarrollar nuevos productos innovadores dentro del departamento de I+D. Además, Sergio también calculaba mediante el método de elementos finitos la maquinaria que diseñaba. También es importante destacar que Sergio participó como inventor en una máquina denominada cazo machacador mediante vibración cuya patente a día de hoy sigue en vigor. Durante su estancia en TABE, Sergio también se dedicaba a dar apoyo técnico y asistencia técnica a los países francófonos.
+Coste acumulado: $0.015099999999999999
+
