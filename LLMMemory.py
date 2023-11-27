@@ -185,8 +185,8 @@ def init_memory()->None:
         st.session_state["messages"] = [
             get_system_prompt_message(),
             AIMessage(content=f"{custom_saludo()} Mi nombre es {BOT_NAME}.\
-                       \nSoy el asistente personal de Sergio y puedo responderte a cualquier pregunta que tengas sobre su curriculum.\
-                      \nSi lo deseas también te lo puedes descargar desde la barra lateral izquierda."),
+                    \nSoy el asistente personal de Sergio y puedo responderte a cualquier pregunta que tengas sobre su curriculum.\
+                    \nSi lo deseas también te lo puedes descargar desde la barra lateral izquierda."),
             AIMessage(content="Pero primero, ¿Podrías presentarte un poco?")
             ]
         #Streameamos los dos mensajes iniciales con la función stream_response_assistant

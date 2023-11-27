@@ -47,7 +47,6 @@ def init_variables_sesion()->None:
                                                                     apellidos="",
                                                                     empresa="",
                                                                     email="",
-
         )
 
 def mandar_email(pregunta:str,response:dict,*,subject:str)->None:
@@ -84,10 +83,10 @@ def actualizar_contador()->None:
     """Actualiza el contador de descargas del CV sumando 1 y añadiendo la fecha de la última descarga.
     """
     db_conn["ContadorCV"].update_many(
-      {"_id" : CONTADOR_ID}, 
-      {"$inc" : {"contador" : 1}, #incrementamos en 1
-       "$set":{"fecha_ultimo" : format_datetime}},
-  )
+    {"_id" : CONTADOR_ID}, 
+    {"$inc" : {"contador" : 1}, #incrementamos en 1
+    "$set":{"fecha_ultimo" : format_datetime}},
+    )
 
 def insertar_db_preguntas_respuestas(db_schema:models.PreguntasRespuestas)->None:
     """Inserta en base de datos la pregunta y la respuesta asi como la fecha y hora.
@@ -122,7 +121,7 @@ def actualizar_id_sesion()->dict:
     st.session_state["query_num"] = query_num
     return {
         "id_sesion" : id_sesion,
-         "query_num" :query_num,
+        "query_num" :query_num,
     }
 
 ##############################
@@ -132,7 +131,12 @@ init_variables_sesion()
 
 #Descargar el CV en pdf en la sidebar
 with st.sidebar:
-    st.subheader("Descargar CV en :red[p]df")
+    st.image("img/Logo STM.png")
+    st.markdown("""
+    <h1 style='text-align: center; color: #292e48; font-family: "Arial", sans-serif;'>
+        STM
+    </h1>
+    """, unsafe_allow_html=True)    
     with open(CV_PATH,"rb") as file:
         boton = st.download_button(
             label = "Descargar",
@@ -140,10 +144,9 @@ with st.sidebar:
             file_name = CV_FILE,
             mime = "cv/pdf",
             on_click=actualizar_contador,#mandar_email("Alguien se ha descargado tu CV en pdf",subject = "Descarga del CV en pdf"),
+            use_container_width=True,
+            help="Descarg el CV de STM en formato pdf"
         )
-
-st.header("📄 :orange[Sergio Tejedor Moreno's CV] ")
-st.divider()
 
 #importamos el script de la lógica de la IA
 import LLMMemory as llmm
