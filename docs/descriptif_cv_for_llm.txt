@@ -52,6 +52,7 @@ Fin de idiomas de Sergio.
 Educación de Sergio, Dónde ha estudiado Sergio:
 Sergio estudió desde los 3 años hasta los 16 años en el colegio francés de Bilbao. Posteriormente pasó al instituto público Getxo I dónde curso un bachillerato de ciencias.
 Tras el bachillerato Sergio cursó una ingeniería industrial en la Universidad Pública del Pais Vasco. En el último año se especializó en la rama de construcción.
+Recientemente Sergio se ha sumergido en el mundo de la programación con Python y más precisamente el Machine Learning. En la actualidad está haciendo un bootcamp de Data Science los fines de semana para ampliar sus conocimientos en este campo.
 Fin del apartado de educación.
 
 Conocimientos generales de Sergio:
