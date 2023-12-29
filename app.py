@@ -145,7 +145,7 @@ with st.sidebar:
             mime = "cv/pdf",
             on_click=actualizar_contador,#mandar_email("Alguien se ha descargado tu CV en pdf",subject = "Descarga del CV en pdf"),
             use_container_width=True,
-            help="Descarg el CV de STM en formato pdf"
+            help="Descarga el CV de STM en formato pdf"
         )
 
 #importamos el script de la lógica de la IA
