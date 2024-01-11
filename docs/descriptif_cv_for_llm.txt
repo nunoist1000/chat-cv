@@ -66,6 +66,7 @@ Sergio también tiene otra aplicación web sencilla en la que proporciona una se
 Sergio ha realizado recientemente otra app que permite al usuario resumir y sacar las marcas de tiempo, mediante una IA, de un video de youtube a partir de su enlace. El enlace a la aplicación es el siguiente: https://sytico.streamlit.app/.
 Otra aplicación que realizó fue para ayudarle a sacar momentos de inercia de secciones complejas. Esta aplicación además dibuja dichas secciones y existe la posibilidad de almacenarlas para cargarlas más adelante. La aplicación está disponible en el siguiente enlace: https://inerties.streamlit.app/
 Sergio también tiene experiencia realizando Macros en excel y programando con Visual Basic for Applications (VBA).
+La última aplicación realizada por Sergio consiste en una plataforma para evaluar modelos entrenados. Estos modelos han sido creados para participar en los desafíos de la plataforma Kopuru. Enlace a la aplicación: https://kopuru-model-eval.streamlit.app/
 Fin de conocimientos generales de Sergio.
 
 

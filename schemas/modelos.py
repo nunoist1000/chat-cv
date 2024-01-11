@@ -3,33 +3,11 @@ from datetime import datetime
 from bson import ObjectId
 import pytz
 
-#Esta clase hace que el id de mongo sea compatible con pydantic
-class PyObjectId(ObjectId):
-    @classmethod
-    def __get_validators__(cls):
-        yield cls.validate
-
-    @classmethod
-    def validate(cls, v):
-        if not ObjectId.is_valid(v):
-            raise ValueError("Invalid objectid")
-        return ObjectId(v)
-
-    @classmethod
-    def __get_pydantic_json_schema__(cls, core_schema, handler):
-        core_schema.update(type="string")
-        return handler(core_schema)
-
-class MongoBaseModel(BaseModel):
-    id: PyObjectId = Field(default_factory = PyObjectId, alias="_id")
-
-    class Config:
-        json_encoders = {ObjectId : str} #Esto se usa para serializar el json
 
 def format_datetime():
     return datetime.strftime(datetime.now(tz=pytz.timezone('Europe/Madrid')),format="%d-%m-%Y %H:%M:%S")
 
-class PreguntasRespuestas(MongoBaseModel):
+class PreguntasRespuestas(BaseModel):
     id_sesion: str
     query_num: int
     nombre: str
@@ -42,7 +20,7 @@ class PreguntasRespuestas(MongoBaseModel):
     coste: float
     tokens: int
 
-class ContadorCV(MongoBaseModel): #Esquema para guardar el numero de descargas del cv
+class ContadorCV(BaseModel): #Esquema para guardar el numero de descargas del cv
     fecha_desde: datetime
     contador: int
     fecha_ultimo : datetime = Field(default_factory=datetime.now)

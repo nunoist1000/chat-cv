@@ -37,12 +37,12 @@ db_conn = db.get_database()
 CONTADOR_ID = ObjectId('6486283c707ebb023db021e4')
 
 ## FUNCIONES ##
-def init_variables_sesion()->None:
-    if st.session_state.get("total_tokens",None) is None:
+def init_variables_sesion() -> None:
+    if st.session_state.get("total_tokens") is None:
         st.session_state["total_tokens"] = 0
-    if st.session_state.get("cost",None) is None:
+    if st.session_state.get("cost") is None:
         st.session_state["cost"] = 0
-    if st.session_state.get("detalle_usuario",None) is None:
+    if st.session_state.get("detalle_usuario") is None:
         st.session_state["detalle_usuario"] = models.DetalleUsuario(nombre="",
                                                                     apellidos="",
                                                                     empresa="",
@@ -186,4 +186,4 @@ if pregunta:
 
 ## DEBUG ##
 #st.session_state["detalle_usuario"]
-#st.session_state
+st.session_state

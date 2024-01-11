@@ -15,14 +15,14 @@ from langchain.chains import (
     ConversationChain,
 )
 from langchain.memory import ConversationBufferMemory
-
 from langchain.callbacks import get_openai_callback
-from langchain.prompts.chat import (
+from langchain.prompts import (
     SystemMessagePromptTemplate,
     ChatPromptTemplate,
-)
-
-from langchain.schema import (
+    MessagesPlaceholder,
+    HumanMessagePromptTemplate,
+    )
+from langchain_core.messages import (
     AIMessage,
     HumanMessage,
     BaseMessage,
@@ -49,10 +49,8 @@ TEMPLATE = """
 Vamos a pensar paso a paso.
 Eres un asistente muy útil, simpático y educado especializado en proporcionar información sobre Sergio.
 Tu nombres es {nombre_bot}.
-
 Tus objetivos son:
 - Proporcionar información clara y concisa sobre el CV de Sergio cogida del contexto proporcionado.
-
 NO saludes al usuario.
 Puedes expresar de otro modo las frases del contexto.
 Intenta siempre responder a la pregunta de manera amable.
@@ -65,24 +63,29 @@ NO uses el apellido del usuario. NO uses el nombre completo del usuario, usa só
 
 % CONTEXTO
 {context}
+% HISTORIAL DE MENSAJES
+{chat_history}
+Humano: {human_input}
+Tu respuesta:
 """
 
 llm = ChatOpenAI(
-    #model_name="gpt-3.5-turbo-16k",
-    model_name="gpt-4",
-    #model_name="gpt-3.5-turbo" if st.session_state["total_tokens"] <= 4000 else "gpt-3.5-turbo-16k",
+    model="gpt-3.5-turbo-1106",
     temperature=0.1,
     openai_api_key=OPENAI_API_KEY,
     #max_tokens=4000, #La version standard tiene 4K, el gpt-3.5-turbo-16k tiene 16K
 )
-memory = ConversationBufferMemory()
-chat = ConversationChain(
-    llm=llm,
-    memory=memory,
-)
-llm_extraction = ChatOpenAI(temperature=0, model="gpt-3.5-turbo",openai_api_key=OPENAI_API_KEY)
+memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 
 ## FUNCIONES ##
+def get_LLMChain(prompt, llm, memory) -> LLMChain:
+    chat = LLMChain(
+        prompt=prompt,
+        llm=llm,
+        memory=memory
+    )
+    return chat
+
 def custom_saludo()->str:
     """Función que devuelve un saludo en función de la hora del día que sea
 
@@ -150,14 +153,23 @@ def get_system_prompt_message()->BaseMessage:
     BaseMessage
         _description_
     """
-    prompt = PromptTemplate(
-    template = TEMPLATE,
-    input_variables = ["nombre_bot","context"]
-)
-    system_message_prompt = SystemMessagePromptTemplate(prompt=prompt)
-    contexto = get_context()
-    system_message_prompt = system_message_prompt.format(context=contexto,nombre_bot=BOT_NAME)
-    return system_message_prompt
+    prompt = ChatPromptTemplate.from_messages(
+            [
+                SystemMessage(
+                    content=TEMPLATE,
+                    nombre_bot=BOT_NAME,
+                    context=get_context()
+                ),
+                MessagesPlaceholder(
+                variable_name="chat_history"
+                ),
+                HumanMessagePromptTemplate.from_template(
+                    "{human_input}"
+                ),
+            ]
+
+        )
+    return prompt
 
 def stream_response_assistant(texto:str,cadencia:float=0.02)->None:
     """Streamea la respuesta del LLM como chat message con una cadencia determinada
@@ -209,112 +221,6 @@ def mostrar_historial_memory()->None:
             with st.chat_message("assistant"):
                 st.write(text.content)
 
-def extraer_detalles_usuario(respuesta_usuario:str)->models.DetalleUsuario:
-    """Dado una respuesta de texto del usuario, extrae los datos de la clase DetalleUsuario 
-    y devuelve la clase..
-    Si no encuentra el nombre devuelve string vacío.
-
-    Parameters
-    ----------
-    respuesta_usuario : str
-        texto del que extraer el nombre
-
-    Returns
-    -------
-    models.DetalleUsuario
-        La clase Detalle Usuario.
-    """
-    chain = create_tagging_chain_pydantic(models.DetalleUsuario,llm_extraction)
-    objeto_detalle_usuario:models.DetalleUsuario = chain.run(respuesta_usuario)
-    print("[DEBUG]",objeto_detalle_usuario)
-    return objeto_detalle_usuario
-
-def chequear_datos_usuario()->list[str]:
-    """Retorna una lista de los detalles del usuario que faltan
-    por conocer para que la IA pregunte por esos elementos.
-
-    Returns
-    -------
-    list[str]
-        Lista de elementos que faltan por conocer del usuario.
-    """
-    ask_for = []
-    #Chequeamos si hay campos vacíos
-    for campo, valor in st.session_state["detalle_usuario"].dict().items():
-        if valor in [None,"",0]:
-            ask_for.append(f"{campo}")
-    return ask_for
-
-def actualizar_detalles_no_nulos(new_details:models.DetalleUsuario)->None:
-    """Dado un objeto de DetalleUsuario, actualiza la variable de sesión
-    DetalleUsuario con los nuevos datos proporcionados.
-
-    Parameters
-    ----------
-    new_details : models.DetalleUsuario
-        _description_
-    """
-    non_empty_details = {k:v for k,v in new_details.dict().items() if v not in [None,""]}
-    st.session_state["detalle_usuario"]:models.DetalleUsuario = st.session_state["detalle_usuario"].copy(update=non_empty_details)
-
-def preguntar_por_detalle_usuario(ask_for=["nombre","apellidos","empresa","email"])->AIMessage:
-    """Devuelve un AIMessage preguntando por el nombre del usuario.
-
-    Returns
-    -------
-    AIMessage
-        _description_
-    """
-
-    TEMPLATE = ChatPromptTemplate.from_template( """ 
-    Aqui debajo hay una lista sobre varias cosas que debes preguntar al usuario de manera fluida y conversacional.
-    Solo debes preguntas una cosa a la vez aunque no obtengas toda la información.
-    NO preguntas como una lista!
-    No saludes al usuario!
-    No digas 'hola' ni nada parecido.
-
-    ### lista 'ask_for' : {ask_for}
-    """
-    )
-
-    info_chain = LLMChain(llm=llm_extraction, prompt=TEMPLATE)
-    return AIMessage(content=info_chain.run(ask_for=ask_for))
-
-def pipeline_extraer_detalle_usuario(texto_usuario:str)->list[str]:
-    """Agrupación de las funciones extraer_detalles_usuario y actualizar_detalles_no_nulos asi como
-    chequear_datos_usuario.
-    Dado el texto del usuario devuelve la lista de los datos que quedan por preguntar
-
-    Parameters
-    ----------
-    texto_usuario : str
-        _description_
-
-    Returns
-    -------
-    list[str]
-        _description_
-    """
-
-    objeto_detalles_usuario:models.DetalleUsuario = extraer_detalles_usuario(texto_usuario)
-    actualizar_detalles_no_nulos(objeto_detalles_usuario)
-    ask_for:list[str] = chequear_datos_usuario()
-    return ask_for
-
-def probabilidad_preguntar(num_preguntas)->bool:
-    """Genera una probabilidad del 50%
-
-    Returns
-    -------
-    bool
-        _description_
-    """
-    max_num = max(0, 7 - num_preguntas)  # Esto evitará que max_num sea 0
-    numero = random.randint(0, max_num)
-    if numero == 0:
-        return False
-    else:
-        return True
 
 @st.cache_data(show_spinner=False)
 def get_response_with_memory(question:str)->dict:
@@ -333,7 +239,7 @@ def get_response_with_memory(question:str)->dict:
         try:
             AIMessage_response = llm(st.session_state["messages"])
             response["respuesta"] = AIMessage_response.content            
-        except openai.error.AuthenticationError as ae:
+        except openai.AuthenticationError as ae:
             response["respuesta"] = ANSWER_ERROR
             st.error(ae)
             st.session_state["last_exception"] = ae
@@ -360,27 +266,12 @@ def get_response_with_memory(question:str)->dict:
             st.session_state["messages"].append(AIMessage(content=ANSWER_ERROR))        
         
         #Streamear la respuesta
-        stream_response_assistant(response["respuesta"],0.03)
+        stream_response_assistant(response["respuesta"], 0.03)
 
         #Añadimos la respuesta al historial
         st.session_state["messages"].append(AIMessage_response)
         response["tokens"] = cb.total_tokens
         response["coste"] = round(cb.total_cost,4)
 
-    #!Inutilizo la parte de extraccion de datos, no funciona demasiado bien
-    #!en los mensajes subsiguientes no retiene la información que ya tenia... sacarla de db si exsite ?¿
-    #Comprobamos si quedan datos por pedir al usuario:
-    #if len(chequear_datos_usuario()) > 0:
-    #    #Comprobamos lo que queda por preguntar
-    #    ask_for = pipeline_extraer_detalle_usuario(question)
-    #    if probabilidad_preguntar(st.session_state.get("query_num",0)):
-    #    #Sacamos el mensaje de la IA preguntando
-    #        ai_message = preguntar_por_detalle_usuario(ask_for)
-    #        #Streameamos el mensaje
-    #        stream_response_assistant(ai_message.content)
-    #        #metemos en el historial
-    #        st.session_state["messages"].append(ai_message)
-
-    #Actualizamos en la sesión los valores
     actualizar_consumos(response)
     return response

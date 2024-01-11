@@ -3,3 +3,4 @@ embeddings
 tests.ipynb
 LLMPrompt.py
 LLMRetriever.py
+logs
