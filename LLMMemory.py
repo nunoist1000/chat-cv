@@ -155,7 +155,7 @@ def get_system_prompt_message()->BaseMessage:
     """
     prompt = ChatPromptTemplate.from_messages(
             [
-                SystemMessage(
+                SystemMessagePromptTemplate(
                     content=TEMPLATE,
                     nombre_bot=BOT_NAME,
                     context=get_context()
