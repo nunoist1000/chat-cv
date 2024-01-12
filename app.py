@@ -1,12 +1,19 @@
+
 from datetime import datetime
-from db_client import get_database
-from bson import ObjectId
-from openai import OpenAI
 import os
 from pathlib import Path
+import random
+import string
+import time
+from typing import Union
+
+from bson import ObjectId
+from openai import OpenAI
 import pytz
 import streamlit as st
-import time
+
+from db_client import get_database
+from schemas.modelos import format_datetime, PreguntasRespuestas
 
 
 CONTADOR_ID = ObjectId('6486283c707ebb023db021e4')
@@ -17,7 +24,6 @@ CV_FOLDER = Path("docs")
 CV_FILE = "cv.pdf"
 CV_PATH = CV_FOLDER / CV_FILE
 db_conn = get_database()
-format_datetime = datetime.strftime(datetime.now(tz=pytz.timezone('Europe/Madrid')),format="%d-%m-%Y %H:%M:%S")
 MODELO = "gpt-3.5-turbo-1106"
 BOT_NAME = 'Renardo'
 PROMPT = """
@@ -43,10 +49,13 @@ pricing = {
     "gpt-3.5-turbo-1106": 0.0020e-3,
 }
 
+def create_id_session() -> str:
+    return "".join(random.choices(string.ascii_uppercase,k=4))
+
 def format_prompt(prompt:str, **kwargs) -> str:
     return prompt.format(**kwargs)
 
-def custom_saludo()->str:
+def custom_saludo() -> str:
     """Función que devuelve un saludo en función de la hora del día que sea
 
     Parameters
@@ -80,16 +89,16 @@ def get_welcome_msg() -> str:
                     \nSi lo deseas también te lo puedes descargar desde la barra lateral izquierda."
     return msg
         
-def actualizar_contador()->None:
+def actualizar_contador() -> None:
     """Actualiza el contador de descargas del CV sumando 1 y añadiendo la fecha de la última descarga.
     """
     db_conn["ContadorCV"].update_many(
     {"_id" : CONTADOR_ID}, 
     {"$inc" : {"contador" : 1}, #incrementamos en 1
-    "$set":{"fecha_ultimo" : format_datetime}},
+    "$set":{"fecha_ultimo" : format_datetime()}},
     )
 
-def get_context()->str:
+def get_context() -> str:
     """Carga el contenido del contexto (mi CV) en un string
 
     Returns
@@ -101,17 +110,60 @@ def get_context()->str:
         #al ser objeto Path, se encarga de abrir y cerrar el archivo
         context = CONTEXT_CV_PATH.read_text(encoding="utf-8")
     else:
-        st.error("Error al cargar el contexto")
-        st.stop()
+        raise FileNotFoundError(f"No se encuentra el ficher {CONTEXT_CV_PATH}")
     return context
 
-def get_actual_model() -> str:
-    return st.session_state['openai_model']
+def get_key_sesion(key:str) -> str:
+    """Devuelve una key determinada de la sesión
 
-def update_total_cost(tokens:int) -> float:
-    nuevo_coste = tokens * pricing.get(get_actual_model(), 0)
-    st.session_state['total_cost'] += nuevo_coste
-    return st.session_state['total_cost']
+    Returns
+    -------
+    str
+        el valor de la key de sesión
+    """
+    return st.session_state[key]
+
+def calculate_cost(tokens:int) -> float:
+    """Calcula el coste de los tokens en función del modelo
+
+    Parameters
+    ----------
+    tokens : int
+        _description_
+
+    Returns
+    -------
+    float
+        total_cost
+    """
+    return tokens * pricing.get(get_key_sesion('openai_model'), 0)
+
+def inc_value_in_session(key:str, value:Union[float, int]) -> float:
+    """Incrementa el valor de una variable de la sesión en un determinado valor
+
+    Parameters
+    ----------
+    cost : float
+        _description_
+
+    Returns
+    -------
+    float
+        _description_
+    """
+    st.session_state[key] += value
+    return st.session_state[key]
+
+def insert_schema_in_db(db_schema:PreguntasRespuestas) -> None:
+    """Inserta en base de datos la pregunta y la respuesta asi como la fecha y hora.
+    En formato de clase PreguntasRespuestas
+
+    Parameters
+    ----------
+    db_schema : models.PreguntasRespuestas
+        _description_
+    """
+    db_conn["PreguntasRespuestas"].insert_one(db_schema.dict())
 
 def main():
     # Cargamos variables del sistema
@@ -141,12 +193,20 @@ def main():
             )
     # Set OpenAI API key from Streamlit secrets
     client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
+    # Inicializamos una id de sesión
+    if "id_session" not in st.session_state:
+        st.session_state['id_session'] = create_id_session()
+    if 'query_num' not in st.session_state:
+        st.session_state['query_num'] = 0
     # Set a default model
     if "openai_model" not in st.session_state:
         st.session_state["openai_model"] = MODELO
     # Inicializamos el precio
     if 'total_cost' not in st.session_state:
         st.session_state['total_cost'] = 0
+    # Inicializamos los tokens totales
+    if 'total_tokens' not in st.session_state:
+        st.session_state['total_tokens'] = 0
     # Initialize chat history
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -184,16 +244,35 @@ def main():
         response = client.chat.completions.create(
                                 model=st.session_state["openai_model"],
                                 messages=[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages],
-                                #stream=True,
                             )
-        for char in response.choices[0].message.content:
+        text_response = response.choices[0].message.content
+        for char in text_response:
             full_response += char
             message_placeholder.markdown(full_response + "▌")
             time.sleep(0.03)
         message_placeholder.markdown(full_response)
-        update_total_cost(response.usage.total_tokens)
-        st.session_state.messages.append({"role": "assistant", "content": full_response})    
+        # Recogemos los tokens
+        total_tokens = response.usage.total_tokens
+        # Recogemos el coste
+        cost = calculate_cost(total_tokens)
+        # Acumulamos coste total en sesión, tokens y la query
+        inc_value_in_session('total_cost', cost)
+        inc_value_in_session('query_num', 1)
+        inc_value_in_session('total_tokens', total_tokens)
+        # Actualizamos mensaje en sesión para la "memoria"
+        st.session_state.messages.append({"role": "assistant", "content": full_response})
+        # Registramos en base de datos
+        schema = PreguntasRespuestas(
+            pregunta=prompt,
+            id_sesion=get_key_sesion('id_session'),
+            query_num=get_key_sesion('query_num'),
+            respuesta=text_response,
+            coste=cost,
+            tokens=total_tokens,
+        )
+        insert_schema_in_db(schema)
+        
 
 if __name__ == '__main__':
     main()
-    st.write(st.session_state.get('total_cost', 0))
+    st.write(st.session_state.get('total_cost', 0), st.session_state.get('total_tokens'))
