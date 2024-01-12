@@ -1,6 +1,3 @@
-embeddings
 .env
 tests.ipynb
-LLMPrompt.py
-LLMRetriever.py
-logs
+deprecated

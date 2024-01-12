@@ -13,9 +13,8 @@ Ver la app [aquí](https://stm-cv.streamlit.app/).
 - 15/07/2023 - La IA parsea el nombre del usuario, si este lo dice, y lo almacena en la base de datos.
 - 17/07/2023 - La IA pregunta por el nombre del usuario si este no se lo ha proporcionado.
 - 20/07/2023 - Añadida lógica mediante la cual la IA te pregunta más datos
+- 12/01/2024 - Reescribo el código completo adaptando a los cambios de la API de OpenAI. Dejo de usar Langchain
 
 ## Próximas etapas
-- No me gusta que la 'chain' de preguntar datos sea independiente de la 'chain' principal.<br>
-Qué pasa si el usuario no quiere proporcionar un dato? la IA lo seguirá preguntando...Habría que mejorar este aspecto.
-- Conseguir reproducir el sonido.
+
 
