@@ -6,8 +6,8 @@ from bson import ObjectId
 from dotenv import load_dotenv
 from pymongo import MongoClient
 
-from backend.utils import format_datetime
-from backend.schemas.db_schemas import PreguntasRespuestas
+from .utils import format_datetime
+from .schemas.db_schemas import PreguntasRespuestas
 
 load_dotenv()
 

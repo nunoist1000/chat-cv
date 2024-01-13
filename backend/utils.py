@@ -5,7 +5,7 @@ import pytz
 import random
 import string
 
-from backend.paths import CONTEXT_CV_PATH
+from .paths import CONTEXT_CV_PATH
 
 def format_datetime() -> str:
     """Devuelve en formato dia-mes-año hora:minuto:segundo

@@ -3,7 +3,7 @@
 from datetime import datetime
 import pytz
 
-from backend.utils import get_context
+from .utils import get_context
 
 MODELO = "gpt-3.5-turbo-1106"
 BOT_NAME = 'Renardo'
