@@ -43,8 +43,8 @@ def get_context() -> str:
         El contexto que usará el LLM para el in-context learning
     """
     if CONTEXT_CV_PATH.exists():
-        #al ser objeto Path, se encarga de abrir y cerrar el archivo
+        # al ser objeto Path, se encarga de abrir y cerrar el archivo
         context = CONTEXT_CV_PATH.read_text(encoding="utf-8")
     else:
-        raise FileNotFoundError(f"No se encuentra el ficher {CONTEXT_CV_PATH}")
+        raise FileNotFoundError(f"No se encuentra el fichero {CONTEXT_CV_PATH}")
     return context

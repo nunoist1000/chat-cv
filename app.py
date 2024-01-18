@@ -15,12 +15,16 @@ from backend.paths import CV_PATH, CV_FILE
 from backend.bot import (build_system_prompt, 
                         get_welcome_msg, 
                         calculate_cost,
-                        get_model)
+                        get_model,
+                        get_end_of_conversation,
+                        )
 
 STREAM_DELAY = 0.03
+FINAL_MSG = '💤...😴...💤'
+QUERY_LIMIT = 10
 
 def get_key_sesion(key:str) -> str:
-    """Devuelve una key determinada de la sesión
+    """Devuelve el valor de una key determinada de la sesión
 
     Returns
     -------
@@ -63,7 +67,7 @@ def main():
         </h1>
         """, unsafe_allow_html=True)    
         with open(CV_PATH,"rb") as file:
-            boton = st.download_button(
+            st.download_button(
                 label = "Descargar",
                 data = file,
                 file_name = CV_FILE,
@@ -76,21 +80,21 @@ def main():
     client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
     # Inicializamos todas las variables de sesión
     # Inicializamos una id de sesión
-    if "id_session" not in st.session_state:
+    if st.session_state.get('id_session') is None:
         st.session_state['id_session'] = create_id_session()
-    if 'query_num' not in st.session_state:
+    if st.session_state.get('query_num') is None:
         st.session_state['query_num'] = 0
     # Inicializa el modelo
-    if "openai_model" not in st.session_state:
+    if st.session_state.get('openai_model') is None:
         st.session_state["openai_model"] = get_model()
     # Inicializamos el precio
-    if 'total_cost' not in st.session_state:
+    if st.session_state.get('total_cost') is None:
         st.session_state['total_cost'] = 0
     # Inicializamos los tokens totales
-    if 'total_tokens' not in st.session_state:
+    if st.session_state.get('total_tokens') is None:
         st.session_state['total_tokens'] = 0
     # Inicializa el mensaje de bienvenida
-    if "messages" not in st.session_state:
+    if st.session_state.get('messages') is None:
         st.session_state.messages = []
         # Prompt system
         st.session_state.messages.append(
@@ -108,7 +112,7 @@ def main():
         st.session_state.messages.append({"role": "assistant", "content": get_welcome_msg()})
         st.rerun()
 
-    # Muestra el historial de mensajes
+    # Muestra el historial de mensajes menos el system prompt
     for message in st.session_state.messages:
         if message['role'] != 'system':
             with st.chat_message(message["role"]):
@@ -116,6 +120,8 @@ def main():
 
     # Input del usuario
     if prompt := st.chat_input("Escribe lo que quieras"):
+        # Incrementamos la query
+        inc_value_in_session('query_num', 1)
         # Añade el input al historial
         st.session_state.messages.append({"role": "user", "content": prompt})
         # Muestra el mensaje del usuario
@@ -125,37 +131,45 @@ def main():
         with st.chat_message("assistant"):
             message_placeholder = st.empty()
             full_response = ""
-        response = client.chat.completions.create(
-                    model=st.session_state["openai_model"],
-                    messages=[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages],
-                )
-        text_response = response.choices[0].message.content
+        # Comprobar aqui si el número de inputs supera un cierto número
+        if (num_query:=st.session_state.get('query_num')) == QUERY_LIMIT:
+            text_response = get_end_of_conversation()
+        elif num_query > QUERY_LIMIT:
+            text_response = FINAL_MSG
+        else:
+            response = client.chat.completions.create(
+                        model=st.session_state["openai_model"],
+                        messages=[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages],
+                    )
+            text_response = response.choices[0].message.content
+            # Recogemos los tokens
+            total_tokens = response.usage.total_tokens
+            # Recogemos el coste
+            cost = calculate_cost(total_tokens, get_key_sesion('openai_model'))
+            # Acumulamos coste total, tokens y la query en sesión
+            inc_value_in_session('total_cost', cost)            
+            inc_value_in_session('total_tokens', total_tokens)            
+            # Registramos en base de datos
+            schema = PreguntasRespuestas(
+                pregunta=prompt,
+                id_sesion=get_key_sesion('id_session'),
+                query_num=get_key_sesion('query_num'),
+                respuesta=text_response,
+                coste=cost,
+                tokens=total_tokens,
+            )
+            insert_schema_in_db(schema)
+
         for char in text_response:
             full_response += char
             message_placeholder.markdown(full_response + "▌")
             time.sleep(STREAM_DELAY)
         message_placeholder.markdown(full_response)
-        # Recogemos los tokens
-        total_tokens = response.usage.total_tokens
-        # Recogemos el coste
-        cost = calculate_cost(total_tokens, get_key_sesion('openai_model'))
-        # Acumulamos coste total, tokens y la query en sesión
-        inc_value_in_session('total_cost', cost)
-        inc_value_in_session('query_num', 1)
-        inc_value_in_session('total_tokens', total_tokens)
         # Actualizamos mensaje en sesión para la "memoria"
         st.session_state.messages.append({"role": "assistant", "content": full_response})
-        # Registramos en base de datos
-        schema = PreguntasRespuestas(
-            pregunta=prompt,
-            id_sesion=get_key_sesion('id_session'),
-            query_num=get_key_sesion('query_num'),
-            respuesta=text_response,
-            coste=cost,
-            tokens=total_tokens,
-        )
-        insert_schema_in_db(schema)
+        
         
 
 if __name__ == '__main__':
     main()
+    #st.session_state

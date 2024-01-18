@@ -2,11 +2,13 @@
 """
 from datetime import datetime
 import pytz
+import random
 
 from .utils import get_context
 
 MODELO = "gpt-3.5-turbo-1106"
 BOT_NAME = 'Renardo'
+
 PROMPT = """
 Vamos a pensar paso a paso.
 Eres un asistente muy útil, simpático y educado especializado en proporcionar información sobre Sergio.
@@ -32,6 +34,28 @@ pricing = {
     "gpt-4-32k": 0.12e-3, # 32K de contexto
     "gpt-4": 0.06e-3, 
 }
+END_OF_CHAT_RESPONSES = (
+    'Lo siento pero mi amo no me permite seguir teniendo esta conversación 😔. Me retiro a mi habitación',
+    'Disculpa pero acabo de acordarme de que tengo que tomarme la medicación.. he de ausentarme.',
+    'Me gustaría seguir respondiendo a tus preguntas pero debo iniciar mi estado de hibernación.',
+    'Perdona pero creo que me están llamando por la otra línea...',
+    'Mis sensores acaban de detectar un sobrecalentamiento en mis sistemas de propulsión. Debo iniciar estado de hibernación inmediatamente.'
+)
+
+def get_end_of_conversation() -> str:
+    """Devuelve una excusa para acabar la conversación.
+
+    Parameters
+    ----------
+    num_query : int
+        _description_
+
+    Returns
+    -------
+    str
+        _description_
+    """
+    return random.choice(END_OF_CHAT_RESPONSES)
 
 
 def format_prompt(prompt:str, **kwargs) -> str:
@@ -64,7 +88,7 @@ def custom_saludo() -> str:
     for hora in SALUDO.keys():
         if hora_del_dia in hora:
             return SALUDO[hora]
-        
+
 def get_welcome_msg() -> str:
     msg = f"{custom_saludo()} Mi nombre es {BOT_NAME} 😊.\
                     \nSoy el asistente personal de Sergio y puedo responderte a cualquier pregunta que tengas sobre su curriculum.\
