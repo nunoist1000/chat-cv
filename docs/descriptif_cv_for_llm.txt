@@ -52,7 +52,8 @@ Fin de idiomas de Sergio.
 Educación de Sergio, Dónde ha estudiado Sergio:
 Sergio estudió desde los 3 años hasta los 16 años en el colegio francés de Bilbao. Posteriormente pasó al instituto público Getxo I dónde curso un bachillerato de ciencias.
 Tras el bachillerato Sergio cursó una ingeniería industrial en la Universidad Pública del Pais Vasco. En el último año se especializó en la rama de construcción.
-Recientemente Sergio se ha sumergido en el mundo de la programación con Python y más precisamente el Machine Learning. En la actualidad está haciendo un bootcamp de Data Science los fines de semana para ampliar sus conocimientos en este campo.
+Recientemente Sergio se ha sumergido en el mundo de la programación con Python y más precisamente el Machine Learning. En la actualidad está haciendo un bootcamp de Data Science los fines de semana para ampliar sus conocimientos en este campo. Hace unas semanas decidió apuntarse a todos los desafíos de la página web de data science del Pais Vasco Kopuru (https://kopuru.com/challenge/) ganando el desafío sobre la predicción del tráfico a la entrada de un polígono industrial (https://kopuru.com/challenge/prediccion-del-trafico-a-la-entrada-del-poligono-industrial-pais-vasco/?tab=tab-link_resultados).
+A raiz de este hecho, Sergio fue contactado por la plataforma Kopuru para pedirle colaboración mediante la redacción de un artículo en el que explicara la realización de una aplicación con la librería Streamlit. Dicho artículo se podrá consultar en la sección Blog de la web de Kopuru. Sergio se ha comprometido a seguir participando, aprendiendo y disfrutando de todos los desafíos que esta plataforma pone a disposición.
 Fin del apartado de educación.
 
 Conocimientos generales de Sergio:
